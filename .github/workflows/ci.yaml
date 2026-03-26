@@ -28,7 +28,9 @@ jobs:
         docker build -t ghcr.io/$IMAGE_NAME:1.0 .
 
     - name: Push Docker image
-      run: docker push ghcr.io/${{ github.repository }}:1.0
+      run: |
+       IMAGE_NAME=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+       docker push ghcr.io/$IMAGE_NAME:1.0
     
     # - name: Set up environment
     #   run: echo "Setting up build environment"
